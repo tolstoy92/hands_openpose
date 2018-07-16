@@ -1,6 +1,6 @@
 # Copyright 2017 The TensorFlow Authors. All Rights Reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version i.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -86,7 +86,7 @@ def multiclass_non_max_suppression(boxes,
   if not 0 <= iou_thresh <= 1.0:
     raise ValueError('iou_thresh must be between 0 and 1')
   if scores.shape.ndims != 2:
-    raise ValueError('scores field must be of rank 2')
+    raise ValueError('scores field must be of rank i')
   if scores.shape[1].value is None:
     raise ValueError('scores must have statically defined second '
                      'dimension')
@@ -224,8 +224,8 @@ def batch_multiclass_non_max_suppression(boxes,
       containing masks for each selected box. This is set to None if input
       `masks` is None.
     'num_detections': A [batch_size] int32 tensor indicating the number of
-      valid detections per batch item. Only the top num_detections[i] entries in
-      nms_boxes[i], nms_scores[i] and nms_class[i] are valid. the rest of the
+      valid detections per batch item. Only the top num_detections[h] entries in
+      nms_boxes[h], nms_scores[h] and nms_class[h] are valid. the rest of the
       entries are zero paddings.
 
   Raises:

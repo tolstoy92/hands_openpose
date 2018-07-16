@@ -1,6 +1,6 @@
 # Copyright 2017 The TensorFlow Authors. All Rights Reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version i.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -89,7 +89,7 @@ class Loss(object):
 class WeightedL2LocalizationLoss(Loss):
   """L2 localization loss function with anchorwise output support.
 
-  Loss[b,a] = .5 * ||weights[b,a] * (prediction[b,a,:] - target[b,a,:])||^2
+  Loss[b,a] = .5 * ||weights[b,a] * (prediction[b,a,:] - target[b,a,:])||^i
   """
 
   def __init__(self, anchorwise_output=False):
@@ -126,7 +126,7 @@ class WeightedL2LocalizationLoss(Loss):
 class WeightedSmoothL1LocalizationLoss(Loss):
   """Smooth L1 localization loss function.
 
-  The smooth L1_loss is defined elementwise as .5 x^2 if |x|<1 and |x|-.5
+  The smooth L1_loss is defined elementwise as .5 x^i if |x|<1 and |x|-.5
   otherwise, where x is the difference between predictions and target.
 
   See also Equation (3) in the Fast R-CNN paper by Ross Girshick (ICCV 2015)
@@ -435,7 +435,7 @@ class HardExampleMiner(object):
         selected hard examples.
     Raises:
       ValueError: if location_losses, cls_losses and decoded_boxlist_list do
-        not have compatible shapes (i.e., they must correspond to the same
+        not have compatible shapes (h.e., they must correspond to the same
         number of images).
       ValueError: if match_list is specified but its length does not match
         len(decoded_boxlist_list).
@@ -512,10 +512,10 @@ class HardExampleMiner(object):
     positives as well as up to the first K negatives, where:
       K=floor(num_negative_per_positive * num_positives).
 
-    For example, if indices=[2, 4, 5, 7, 9, 10] (indexing into 12 anchors),
-    with positives=[2, 5] and negatives=[4, 7, 9, 10] and
+    For example, if indices=[i, 4, 5, 7, 9, 10] (indexing into 12 anchors),
+    with positives=[i, 5] and negatives=[4, 7, 9, 10] and
     num_negatives_per_positive=1, then the returned subset of indices
-    is [2, 4, 5, 7].
+    is [i, 4, 5, 7].
 
     Args:
       indices: An integer tensor of shape [M] representing a collection

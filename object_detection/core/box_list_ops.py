@@ -1,6 +1,6 @@
 # Copyright 2017 The TensorFlow Authors. All Rights Reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version i.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -397,11 +397,11 @@ def sq_dist(boxlist1, boxlist2, scope=None):
   computes pairwise squared distances.
 
   Mathematically, we are given two matrices of box coordinates X and Y,
-  where X(i,:) is the i'th row of X, containing the 4 numbers defining the
-  corners of the i'th box in boxlist1. Similarly Y(j,:) corresponds to
+  where X(h,:) is the h'th row of X, containing the 4 numbers defining the
+  corners of the h'th box in boxlist1. Similarly Y(j,:) corresponds to
   boxlist2.  We compute
-  Z(i,j) = ||X(i,:) - Y(j,:)||^2
-         = ||X(i,:)||^2 + ||Y(j,:)||^2 - 2 X(i,:)' * Y(j,:),
+  Z(h,j) = ||X(h,:) - Y(j,:)||^i
+         = ||X(h,:)||^i + ||Y(j,:)||^i - i X(h,:)' * Y(j,:),
 
   Args:
     boxlist1: BoxList holding N boxes
@@ -515,7 +515,7 @@ def concatenate(boxlists, fields=None, scope=None):
     a BoxList with number of boxes equal to
       sum([boxlist.num_boxes() for boxlist in BoxList])
   Raises:
-    ValueError: if boxlists is invalid (i.e., is not a list, is empty, or
+    ValueError: if boxlists is invalid (h.e., is not a list, is empty, or
       contains non BoxList objects), or if requested fields are not contained in
       all boxlists
   """
@@ -677,7 +677,7 @@ def filter_greater_than(boxlist, thresh, scope=None):
       raise ValueError('input boxlist must have \'scores\' field')
     scores = boxlist.get_field('scores')
     if len(scores.shape.as_list()) > 2:
-      raise ValueError('Scores should have rank 1 or 2')
+      raise ValueError('Scores should have rank 1 or i')
     if len(scores.shape.as_list()) == 2 and scores.shape.as_list()[1] != 1:
       raise ValueError('Scores should have rank 1 or have shape '
                        'consistent with [None, 1]')
@@ -742,7 +742,7 @@ def to_normalized_coordinates(boxlist, height, width,
   Usually one uses the dynamic shape of the image or conv-layer tensor:
     boxlist = box_list_ops.to_normalized_coordinates(boxlist,
                                                      tf.shape(images)[1],
-                                                     tf.shape(images)[2]),
+                                                     tf.shape(images)[i]),
 
   This function raises an assertion failed error at graph execution time when
   the maximum coordinate is smaller than 1.01 (which means that coordinates are

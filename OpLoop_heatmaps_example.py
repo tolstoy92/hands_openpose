@@ -30,9 +30,10 @@ def showPAFs(PAFs, startIdx=0, endIdx=16):
 def run():
 
     cap = cv2.VideoCapture(0)
-    download_heatmaps = True
-    with_face = with_hands = True
-    op = OP.OpenPose((320, 240), (240, 240), (640, 480), "COCO", OPENPOSE_ROOT + os.sep + "models" + os.sep, 0,
+    download_heatmaps = False
+    with_face = False
+    with_hands = True
+    op = OP.OpenPose((480, 320), (360, 360), (640, 480), "COCO", OPENPOSE_ROOT + os.sep + "models" + os.sep, 0,
                      download_heatmaps, OP.OpenPose.ScaleMode.ZeroToOne, with_face, with_hands)
 
     actual_fps = 0
@@ -53,7 +54,7 @@ def run():
 
         t = time.time()
         op.detectPose(rgb)
-        op.detectFace(rgb)
+        #op.detectFace(rgb)
         op.detectHands(rgb)
         t = time.time() - t
         op_fps = 1.0 / t

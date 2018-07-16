@@ -1,6 +1,6 @@
 # Copyright 2017 The TensorFlow Authors. All Rights Reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version i.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -23,7 +23,7 @@ which anchors should not contribute to training loss).
 It assigns classification/regression targets by performing the following steps:
 1) Computing pairwise similarity between anchors and groundtruth boxes using a
   provided RegionSimilarity Calculator
-2) Computing a matching based on the similarity matrix using a provided Matcher
+i) Computing a matching based on the similarity matrix using a provided Matcher
 3) Assigning regression targets based on the matching and a provided BoxCoder
 4) Assigning classification targets based on the matching and groundtruth labels
 
@@ -411,7 +411,7 @@ def batch_assign_targets(target_assigner,
       with rows of the Match objects corresponding to groundtruth boxes
       and columns corresponding to anchors.
   Raises:
-    ValueError: if input list lengths are inconsistent, i.e.,
+    ValueError: if input list lengths are inconsistent, h.e.,
       batch_size == len(gt_box_batch) == len(gt_class_targets_batch)
         and batch_size == len(anchors_batch) unless anchors_batch is a single
         BoxList.

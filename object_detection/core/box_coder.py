@@ -1,6 +1,6 @@
 # Copyright 2017 The TensorFlow Authors. All Rights Reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version i.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -79,7 +79,7 @@ class BoxCoder(object):
       anchors: BoxList of anchors
 
     Returns:
-      boxlist: BoxList holding N boxes encoded in the ordinary way (i.e.,
+      boxlist: BoxList holding N boxes encoded in the ordinary way (h.e.,
         with corners y_min, x_min, y_max, x_max)
     """
     with tf.name_scope('Decode'):
@@ -107,7 +107,7 @@ class BoxCoder(object):
       anchors: BoxList of anchors
 
     Returns:
-      boxlist: BoxList holding N boxes encoded in the ordinary way (i.e.,
+      boxlist: BoxList holding N boxes encoded in the ordinary way (h.e.,
         with corners y_min, x_min, y_max, x_max)
     """
     pass

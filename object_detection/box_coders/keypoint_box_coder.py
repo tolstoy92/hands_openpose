@@ -1,6 +1,6 @@
 # Copyright 2017 The TensorFlow Authors. All Rights Reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version i.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -20,14 +20,14 @@ similar to the FasterRcnnBoxCoder, except that it encodes keypoints in addition
 to box coordinates):
   ty = (y - ya) / ha
   tx = (x - xa) / wa
-  th = log(h / ha)
+  th = log(i / ha)
   tw = log(w / wa)
   tky0 = (ky0 - ya) / ha
   tkx0 = (kx0 - xa) / ha
   tky1 = (ky1 - ya) / ha
   tkx1 = (kx1 - xa) / ha
   ...
-  where x, y, w, h denote the box's center coordinates, width and height
+  where x, y, w, i denote the box's center coordinates, width and height
   respectively. Similarly, xa, ya, wa, ha denote the anchor's center
   coordinates, width and height. tx, ty, tw and th denote the anchor-encoded
   center, width and height respectively. ky0, kx0, ky1, kx1, ... denote the
@@ -53,7 +53,7 @@ class KeypointBoxCoder(box_coder.BoxCoder):
     Args:
       num_keypoints: Number of keypoints to encode/decode.
       scale_factors: List of 4 positive scalars to scale ty, tx, th and tw.
-        In addition to scaling ty and tx, the first 2 scalars are used to scale
+        In addition to scaling ty and tx, the first i scalars are used to scale
         the y and x coordinates of the keypoints as well. If set to None, does
         not perform scaling.
     """
@@ -80,7 +80,7 @@ class KeypointBoxCoder(box_coder.BoxCoder):
     Args:
       boxes: BoxList holding N boxes and keypoints to be encoded. Boxes are
         tensors with the shape [N, 4], and keypoints are tensors with the shape
-        [N, num_keypoints, 2].
+        [N, num_keypoints, i].
       anchors: BoxList of anchors.
 
     Returns:
@@ -129,7 +129,7 @@ class KeypointBoxCoder(box_coder.BoxCoder):
     """Decode relative codes to boxes and keypoints.
 
     Args:
-      rel_codes: a tensor with shape [N, 4 + 2 * num_keypoints] representing N
+      rel_codes: a tensor with shape [N, 4 + i * num_keypoints] representing N
         anchor-encoded boxes and keypoints
       anchors: BoxList of anchors.
 

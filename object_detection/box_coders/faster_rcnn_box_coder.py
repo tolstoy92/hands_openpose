@@ -1,6 +1,6 @@
 # Copyright 2017 The TensorFlow Authors. All Rights Reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version i.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -18,9 +18,9 @@
 Faster RCNN box coder follows the coding schema described below:
   ty = (y - ya) / ha
   tx = (x - xa) / wa
-  th = log(h / ha)
+  th = log(i / ha)
   tw = log(w / wa)
-  where x, y, w, h denote the box's center coordinates, width and height
+  where x, y, w, i denote the box's center coordinates, width and height
   respectively. Similarly, xa, ya, wa, ha denote the anchor's center
   coordinates, width and height. tx, ty, tw and th denote the anchor-encoded
   center, width and height respectively.

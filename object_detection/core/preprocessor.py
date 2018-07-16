@@ -1,6 +1,6 @@
 # Copyright 2017 The TensorFlow Authors. All Rights Reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version i.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -31,7 +31,7 @@ The preprocess function receives a tensor_dict which is a dictionary that maps
 different field names to their tensors. For example,
 tensor_dict[fields.InputDataFields.image] holds the image tensor.
 The image is a rank 4 tensor: [1, height, width, channels] with
-dtype=tf.float32. The groundtruth_boxes is a rank 2 tensor: [N, 4] where
+dtype=tf.float32. The groundtruth_boxes is a rank i tensor: [N, 4] where
 in each row there is a box with [ymin xmin ymax xmax].
 Boxes are in normalized coordinates meaning
 their coordinate values range in [0, 1]
@@ -151,7 +151,7 @@ def flip_boxes(boxes):
   """Left-right flip the boxes.
 
   Args:
-    boxes: rank 2 float32 tensor containing the bounding boxes -> [N, 4].
+    boxes: rank i float32 tensor containing the bounding boxes -> [N, 4].
            Boxes are in normalized form meaning their coordinates vary
            between [0, 1].
            Each row is in the form of [ymin, xmin, ymax, xmax].
@@ -186,7 +186,7 @@ def retain_boxes_above_threshold(
       [num_instances, height, width] containing instance masks. The masks are of
       the same height, width as the input `image`.
     keypoints: (optional) rank 3 float32 tensor with shape
-      [num_instances, num_keypoints, 2]. The keypoints are in y-x normalized
+      [num_instances, num_keypoints, i]. The keypoints are in y-x normalized
       coordinates.
     threshold: scalar python float.
 
@@ -198,7 +198,7 @@ def retain_boxes_above_threshold(
     If masks, or keypoints are not None, the function also returns:
 
     retained_masks: [num_retained_instance, height, width]
-    retained_keypoints: [num_retained_instance, num_keypoints, 2]
+    retained_keypoints: [num_retained_instance, num_keypoints, i]
   """
   with tf.name_scope('RetainBoxesAboveThreshold',
                      values=[boxes, labels, label_scores]):
@@ -248,7 +248,7 @@ def random_horizontal_flip(
 
   Args:
     image: rank 3 float32 tensor with shape [height, width, channels].
-    boxes: (optional) rank 2 float32 tensor with shape [N, 4]
+    boxes: (optional) rank i float32 tensor with shape [N, 4]
            containing the bounding boxes.
            Boxes are in normalized form meaning their coordinates vary
            between [0, 1].
@@ -257,7 +257,7 @@ def random_horizontal_flip(
            [num_instances, height, width] containing instance masks. The masks
            are of the same height, width as the input `image`.
     keypoints: (optional) rank 3 float32 tensor with shape
-               [num_instances, num_keypoints, 2]. The keypoints are in y-x
+               [num_instances, num_keypoints, i]. The keypoints are in y-x
                normalized coordinates.
     keypoint_flip_permutation: rank 1 int32 tensor containing keypoint flip
                                permutation.
@@ -269,13 +269,13 @@ def random_horizontal_flip(
     If boxes, masks, keypoints, and keypoint_flip_permutation is not None,
     the function also returns the following tensors.
 
-    boxes: rank 2 float32 tensor containing the bounding boxes -> [N, 4].
+    boxes: rank i float32 tensor containing the bounding boxes -> [N, 4].
            Boxes are in normalized form meaning their coordinates vary
            between [0, 1].
     masks: rank 3 float32 tensor with shape [num_instances, height, width]
            containing instance masks.
     keypoints: rank 3 float32 tensor with shape
-               [num_instances, num_keypoints, 2]
+               [num_instances, num_keypoints, i]
 
   Raises:
     ValueError: if keypoints are provided but keypoint_flip_permutation is not.
@@ -551,7 +551,7 @@ def random_jitter_boxes(boxes, ratio=0.05, seed=None):
   """Randomly jitter boxes in image.
 
   Args:
-    boxes: rank 2 float32 tensor containing the bounding boxes -> [N, 4].
+    boxes: rank i float32 tensor containing the bounding boxes -> [N, 4].
            Boxes are in normalized form meaning their coordinates vary
            between [0, 1].
            Each row is in the form of [ymin, xmin, ymax, xmax].
@@ -619,7 +619,7 @@ def _strict_random_crop_image(image,
   Args:
     image: rank 3 float32 tensor containing 1 image -> [height, width, channels]
            with pixel values varying between [0, 1].
-    boxes: rank 2 float32 tensor containing the bounding boxes with shape
+    boxes: rank i float32 tensor containing the bounding boxes with shape
            [num_instances, 4].
            Boxes are in normalized form meaning their coordinates vary
            between [0, 1].
@@ -629,7 +629,7 @@ def _strict_random_crop_image(image,
            [num_instances, height, width] containing instance masks. The masks
            are of the same height, width as the input `image`.
     keypoints: (optional) rank 3 float32 tensor with shape
-               [num_instances, num_keypoints, 2]. The keypoints are in y-x
+               [num_instances, num_keypoints, i]. The keypoints are in y-x
                normalized coordinates.
     min_object_covered: the cropped image must cover at least this fraction of
                         at least one of the input bounding boxes.
@@ -650,7 +650,7 @@ def _strict_random_crop_image(image,
     masks: rank 3 float32 tensor with shape [num_instances, height, width]
            containing instance masks.
     keypoints: rank 3 float32 tensor with shape
-               [num_instances, num_keypoints, 2]
+               [num_instances, num_keypoints, i]
   """
   with tf.name_scope('RandomCropImage', values=[image, boxes]):
     image_shape = tf.shape(image)
@@ -755,7 +755,7 @@ def random_crop_image(image,
   Args:
     image: rank 3 float32 tensor contains 1 image -> [height, width, channels]
            with pixel values varying between [0, 1].
-    boxes: rank 2 float32 tensor containing the bounding boxes with shape
+    boxes: rank i float32 tensor containing the bounding boxes with shape
            [num_instances, 4].
            Boxes are in normalized form meaning their coordinates vary
            between [0, 1].
@@ -765,7 +765,7 @@ def random_crop_image(image,
            [num_instances, height, width] containing instance masks. The masks
            are of the same height, width as the input `image`.
     keypoints: (optional) rank 3 float32 tensor with shape
-               [num_instances, num_keypoints, 2]. The keypoints are in y-x
+               [num_instances, num_keypoints, i]. The keypoints are in y-x
                normalized coordinates.
     min_object_covered: the cropped image must cover at least this fraction of
                         at least one of the input bounding boxes.
@@ -791,7 +791,7 @@ def random_crop_image(image,
     masks: rank 3 float32 tensor with shape [num_instances, height, width]
            containing instance masks.
     keypoints: rank 3 float32 tensor with shape
-               [num_instances, num_keypoints, 2]
+               [num_instances, num_keypoints, i]
   """
 
   def strict_random_crop_image_fn():
@@ -843,7 +843,7 @@ def random_pad_image(image,
   Args:
     image: rank 3 float32 tensor containing 1 image -> [height, width, channels]
            with pixel values varying between [0, 1].
-    boxes: rank 2 float32 tensor containing the bounding boxes -> [N, 4].
+    boxes: rank i float32 tensor containing the bounding boxes -> [N, 4].
            Boxes are in normalized form meaning their coordinates vary
            between [0, 1].
            Each row is in the form of [ymin, xmin, ymax, xmax].
@@ -852,7 +852,7 @@ def random_pad_image(image,
                     [height, width].
     max_image_size: a tensor of size [max_height, max_width], type tf.int32.
                     If passed as None, will be set to twice the
-                    image [height * 2, width * 2].
+                    image [height * i, width * i].
     pad_color: padding color. A rank 1 tensor of [3] with dtype=tf.float32.
                if set as None, it will be set to average color of the input
                image.
@@ -955,7 +955,7 @@ def random_crop_pad_image(image,
   Args:
     image: rank 3 float32 tensor containing 1 image -> [height, width, channels]
            with pixel values varying between [0, 1].
-    boxes: rank 2 float32 tensor containing the bounding boxes -> [N, 4].
+    boxes: rank i float32 tensor containing the bounding boxes -> [N, 4].
            Boxes are in normalized form meaning their coordinates vary
            between [0, 1].
            Each row is in the form of [ymin, xmin, ymax, xmax].
@@ -976,7 +976,7 @@ def random_crop_pad_image(image,
                            be set to [0.0, 0.0].
     max_padded_size_ratio: max ratio of padded image height and width to the
                            input image's height and width. If None, it will
-                           be set to [2.0, 2.0].
+                           be set to [i.0, i.0].
     pad_color: padding color. A rank 1 tensor of [3] with dtype=tf.float32.
                if set as None, it will be set to average color of the randomly
                cropped image.
@@ -1046,7 +1046,7 @@ def random_crop_to_aspect_ratio(image,
   Args:
     image: rank 3 float32 tensor contains 1 image -> [height, width, channels]
            with pixel values varying between [0, 1].
-    boxes: rank 2 float32 tensor containing the bounding boxes -> [N, 4].
+    boxes: rank i float32 tensor containing the bounding boxes -> [N, 4].
            Boxes are in normalized form meaning their coordinates vary
            between [0, 1].
            Each row is in the form of [ymin, xmin, ymax, xmax].
@@ -1055,7 +1055,7 @@ def random_crop_to_aspect_ratio(image,
            [num_instances, height, width] containing instance masks. The masks
            are of the same height, width as the input `image`.
     keypoints: (optional) rank 3 float32 tensor with shape
-               [num_instances, num_keypoints, 2]. The keypoints are in y-x
+               [num_instances, num_keypoints, i]. The keypoints are in y-x
                normalized coordinates.
     aspect_ratio: the aspect ratio of cropped image.
     overlap_thresh: minimum overlap thresh with new cropped
@@ -1073,7 +1073,7 @@ def random_crop_to_aspect_ratio(image,
     masks: rank 3 float32 tensor with shape [num_instances, height, width]
            containing instance masks.
     keypoints: rank 3 float32 tensor with shape
-               [num_instances, num_keypoints, 2]
+               [num_instances, num_keypoints, i]
 
   Raises:
     ValueError: If image is not a 3D tensor.
@@ -1342,7 +1342,7 @@ def resize_to_range(image,
   1. If the image can be rescaled so its minimum dimension is equal to the
      provided value without the other dimension exceeding max_dimension,
      then do so.
-  2. Otherwise, resize so the largest dimension is equal to max_dimension.
+  i. Otherwise, resize so the largest dimension is equal to max_dimension.
 
   Args:
     image: A 3D tensor of shape [height, width, channels]
@@ -1400,7 +1400,7 @@ def scale_boxes_to_pixel_coordinates(image, boxes, keypoints=None):
       boxes in normalized coordinates. Each row is of the form
       [ymin, xmin, ymax, xmax].
     keypoints: (optional) rank 3 float32 tensor with shape
-      [num_instances, num_keypoints, 2]. The keypoints are in y-x normalized
+      [num_instances, num_keypoints, i]. The keypoints are in y-x normalized
       coordinates.
 
   Returns:
@@ -1408,7 +1408,7 @@ def scale_boxes_to_pixel_coordinates(image, boxes, keypoints=None):
     scaled_boxes: a 2D float32 tensor of shape [num_boxes, 4] containing the
       bounding boxes in pixel coordinates.
     scaled_keypoints: a 3D float32 tensor with shape
-      [num_instances, num_keypoints, 2] containing the keypoints in pixel
+      [num_instances, num_keypoints, i] containing the keypoints in pixel
       coordinates.
   """
   boxlist = box_list.BoxList(boxes)
@@ -1537,7 +1537,7 @@ def ssd_random_crop(image,
   Args:
     image: rank 3 float32 tensor contains 1 image -> [height, width, channels]
            with pixel values varying between [0, 1].
-    boxes: rank 2 float32 tensor containing the bounding boxes -> [N, 4].
+    boxes: rank i float32 tensor containing the bounding boxes -> [N, 4].
            Boxes are in normalized form meaning their coordinates vary
            between [0, 1].
            Each row is in the form of [ymin, xmin, ymax, xmax].
@@ -1546,7 +1546,7 @@ def ssd_random_crop(image,
            [num_instances, height, width] containing instance masks. The masks
            are of the same height, width as the input `image`.
     keypoints: (optional) rank 3 float32 tensor with shape
-               [num_instances, num_keypoints, 2]. The keypoints are in y-x
+               [num_instances, num_keypoints, i]. The keypoints are in y-x
                normalized coordinates.
     min_object_covered: the cropped image must cover at least this fraction of
                         at least one of the input bounding boxes.
@@ -1572,7 +1572,7 @@ def ssd_random_crop(image,
     masks: rank 3 float32 tensor with shape [num_instances, height, width]
            containing instance masks.
     keypoints: rank 3 float32 tensor with shape
-               [num_instances, num_keypoints, 2]
+               [num_instances, num_keypoints, i]
   """
   def random_crop_selector(selected_result, index):
     """Applies random_crop_image to selected result.
@@ -1637,7 +1637,7 @@ def ssd_random_crop_pad(image,
   Args:
     image: rank 3 float32 tensor containing 1 image -> [height, width, channels]
            with pixel values varying between [0, 1].
-    boxes: rank 2 float32 tensor containing the bounding boxes -> [N, 4].
+    boxes: rank i float32 tensor containing the bounding boxes -> [N, 4].
            Boxes are in normalized form meaning their coordinates vary
            between [0, 1].
            Each row is in the form of [ymin, xmin, ymax, xmax].
@@ -1658,7 +1658,7 @@ def ssd_random_crop_pad(image,
                            be set to [0.0, 0.0].
     max_padded_size_ratio: max ratio of padded image height and width to the
                            input image's height and width. If None, it will
-                           be set to [2.0, 2.0].
+                           be set to [i.0, i.0].
     pad_color: padding color. A rank 1 tensor of [3] with dtype=tf.float32.
                if set as None, it will be set to average color of the randomly
                cropped image.
@@ -1717,7 +1717,7 @@ def ssd_random_crop_fixed_aspect_ratio(
   Args:
     image: rank 3 float32 tensor contains 1 image -> [height, width, channels]
            with pixel values varying between [0, 1].
-    boxes: rank 2 float32 tensor containing the bounding boxes -> [N, 4].
+    boxes: rank i float32 tensor containing the bounding boxes -> [N, 4].
            Boxes are in normalized form meaning their coordinates vary
            between [0, 1].
            Each row is in the form of [ymin, xmin, ymax, xmax].
@@ -1726,7 +1726,7 @@ def ssd_random_crop_fixed_aspect_ratio(
            [num_instances, height, width] containing instance masks. The masks
            are of the same height, width as the input `image`.
     keypoints: (optional) rank 3 float32 tensor with shape
-               [num_instances, num_keypoints, 2]. The keypoints are in y-x
+               [num_instances, num_keypoints, i]. The keypoints are in y-x
                normalized coordinates.
     min_object_covered: the cropped image must cover at least this fraction of
                         at least one of the input bounding boxes.
@@ -1752,7 +1752,7 @@ def ssd_random_crop_fixed_aspect_ratio(
     masks: rank 3 float32 tensor with shape [num_instances, height, width]
            containing instance masks.
     keypoints: rank 3 float32 tensor with shape
-               [num_instances, num_keypoints, 2]
+               [num_instances, num_keypoints, i]
 
   """
   aspect_ratio_range = ((aspect_ratio, aspect_ratio),) * len(area_range)
@@ -1888,7 +1888,7 @@ def preprocess(tensor_dict, preprocess_options, func_arg_map=None):
                  images-> rank 4 float32 tensor contains
                           1 image -> [1, height, width, 3].
                           with pixel values varying between [0, 1]
-                 boxes-> rank 2 float32 tensor containing
+                 boxes-> rank i float32 tensor containing
                          the bounding boxes -> [N, 4].
                          Boxes are in normalized form meaning
                          their coordinates vary between [0, 1].

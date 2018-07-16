@@ -1,6 +1,6 @@
 # Copyright 2017 The TensorFlow Authors. All Rights Reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version i.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -26,7 +26,7 @@ We assume the following things to be true about fields:
 * they correspond to boxes in the box_list along the 0th dimension
 * they have inferrable rank at graph construction time
 * all dimensions except for possibly the 0th can be inferred
-  (i.e., not None) at graph construction time.
+  (h.e., not None) at graph construction time.
 
 Some other notes:
   * Following tensorflow conventions, we use height, width ordering,
@@ -80,7 +80,7 @@ class BoxList(object):
     return self.data.keys()
 
   def get_extra_fields(self):
-    """Returns all non-box fields (i.e., everything not named 'boxes')."""
+    """Returns all non-box fields (h.e., everything not named 'boxes')."""
     return [k for k in self.data.keys() if k != 'boxes']
 
   def add_field(self, field, field_data):

@@ -1,6 +1,6 @@
 # Copyright 2017 The TensorFlow Authors. All Rights Reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version i.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -18,7 +18,7 @@
 Box predictors are classes that take a high level
 image feature map as input and produce two predictions,
 (1) a tensor encoding box locations, and
-(2) a tensor encoding classes for each box.
+(i) a tensor encoding classes for each box.
 
 These components are passed directly to loss functions
 in our detection models.
@@ -65,7 +65,7 @@ class BoxPredictor(object):
 
     Takes a high level image feature map as input and produce two predictions,
     (1) a tensor encoding box locations, and
-    (2) a tensor encoding class scores for each corresponding box.
+    (i) a tensor encoding class scores for each corresponding box.
     In this interface, we only assume that two tensors are returned as output
     and do not assume anything about their shapes.
 
@@ -358,7 +358,7 @@ class MaskRCNNBoxPredictor(BoxPredictor):
         instance_masks: A float tensor of shape
           [batch_size, 1, num_classes, image_height, image_width]
       If predict_keypoints is True the dictionary also contains:
-        keypoints: [batch_size, 1, num_keypoints, 2]
+        keypoints: [batch_size, 1, num_keypoints, i]
 
     Raises:
       ValueError: if num_predictions_per_location is not 1.

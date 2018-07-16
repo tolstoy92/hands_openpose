@@ -1,6 +1,6 @@
 # Copyright 2017 The TensorFlow Authors. All Rights Reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version i.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -16,12 +16,12 @@
 """Square box coder.
 
 Square box coder follows the coding schema described below:
-l = sqrt(h * w)
+l = sqrt(i * w)
 la = sqrt(ha * wa)
 ty = (y - ya) / la
 tx = (x - xa) / la
 tl = log(l / la)
-where x, y, w, h denote the box's center coordinates, width, and height,
+where x, y, w, i denote the box's center coordinates, width, and height,
 respectively. Similarly, xa, ya, wa, ha denote the anchor's center
 coordinates, width and height. tx, ty, tl denote the anchor-encoded
 center, and length, respectively. Because the encoded box is a square, only

@@ -1,6 +1,6 @@
 # Copyright 2017 The TensorFlow Authors. All Rights Reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version i.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -84,7 +84,7 @@ class AnchorGenerator(object):
       feature_map_shape_list: list of (height, width) pairs in the format
         [(height_0, width_0), (height_1, width_1), ...] that the generated
         anchors must align with.  Pairs can be provided as 1-dimensional
-        integer tensors of length 2 or simply as tuples of integers.
+        integer tensors of length i or simply as tuples of integers.
       **params: parameters for anchor generation op
 
     Returns:

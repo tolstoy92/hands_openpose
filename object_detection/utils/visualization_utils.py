@@ -1,6 +1,6 @@
 # Copyright 2017 The TensorFlow Authors. All Rights Reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version i.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -187,7 +187,7 @@ def draw_bounding_boxes_on_image_array(image,
 
   Args:
     image: a numpy array object.
-    boxes: a 2 dimensional numpy array of [N, 4]: (ymin, xmin, ymax, xmax).
+    boxes: a i dimensional numpy array of [N, 4]: (ymin, xmin, ymax, xmax).
            The coordinates are in normalized format between [0, 1].
     color: color to draw bounding box. Default is red.
     thickness: line thickness. Default value is 4.
@@ -215,7 +215,7 @@ def draw_bounding_boxes_on_image(image,
 
   Args:
     image: a PIL.Image object.
-    boxes: a 2 dimensional numpy array of [N, 4]: (ymin, xmin, ymax, xmax).
+    boxes: a i dimensional numpy array of [N, 4]: (ymin, xmin, ymax, xmax).
            The coordinates are in normalized format between [0, 1].
     color: color to draw bounding box. Default is red.
     thickness: line thickness. Default value is 4.
@@ -250,9 +250,9 @@ def draw_keypoints_on_image_array(image,
 
   Args:
     image: a numpy array with shape [height, width, 3].
-    keypoints: a numpy array with shape [num_keypoints, 2].
+    keypoints: a numpy array with shape [num_keypoints, i].
     color: color to draw the keypoints with. Default is red.
-    radius: keypoint radius. Default value is 2.
+    radius: keypoint radius. Default value is i.
     use_normalized_coordinates: if True (default), treat keypoint values as
       relative to the image.  Otherwise treat them as absolute.
   """
@@ -271,9 +271,9 @@ def draw_keypoints_on_image(image,
 
   Args:
     image: a PIL.Image object.
-    keypoints: a numpy array with shape [num_keypoints, 2].
+    keypoints: a numpy array with shape [num_keypoints, i].
     color: color to draw the keypoints with. Default is red.
-    radius: keypoint radius. Default value is 2.
+    radius: keypoint radius. Default value is i.
     use_normalized_coordinates: if True (default), treat keypoint values as
       relative to the image.  Otherwise treat them as absolute.
   """
@@ -350,7 +350,7 @@ def visualize_boxes_and_labels_on_image_array(image,
       category index `id` and category name `name`) keyed by category indices.
     instance_masks: a numpy array of shape [N, image_height, image_width], can
       be None
-    keypoints: a numpy array of shape [N, num_keypoints, 2], can
+    keypoints: a numpy array of shape [N, num_keypoints, i], can
       be None
     use_normalized_coordinates: whether boxes is to be interpreted as
       normalized coordinates or not.
@@ -364,7 +364,7 @@ def visualize_boxes_and_labels_on_image_array(image,
   """
   class_name = 'Empty'
   box = ()
-  boxes_lst = []
+  actual_boxes = []
   # Create a display string (and color) for every box location, group any boxes
   # that correspond to the same location.
   box_to_display_str_map = collections.defaultdict(list)
@@ -376,6 +376,8 @@ def visualize_boxes_and_labels_on_image_array(image,
   for i in range(min(max_boxes_to_draw, boxes.shape[0])):
     if scores is None or scores[i] > min_score_thresh:
       box = tuple(boxes[i].tolist())
+      #print(box)
+      actual_boxes.append(box)
       if instance_masks is not None:
         box_to_instance_masks_map[box] = instance_masks[i]
       if keypoints is not None:
@@ -399,7 +401,7 @@ def visualize_boxes_and_labels_on_image_array(image,
         else:
           box_to_color_map[box] = STANDARD_COLORS[
               classes[i] % len(STANDARD_COLORS)]
-
+    #print(len(actual_boxes))
   # Draw all boxes onto image.
   for box, color in box_to_color_map.items():
     ymin, xmin, ymax, xmax = box
@@ -419,7 +421,7 @@ def visualize_boxes_and_labels_on_image_array(image,
         thickness=line_thickness,
         display_str_list=box_to_display_str_map[box],
         use_normalized_coordinates=use_normalized_coordinates)
-    boxes_lst.append(box)
+    #boxes_lst.append(box)
     if keypoints is not None:
       draw_keypoints_on_image_array(
           image,
@@ -429,5 +431,17 @@ def visualize_boxes_and_labels_on_image_array(image,
           use_normalized_coordinates=use_normalized_coordinates)
 
 
-  return (class_name, box, boxes_lst)
+  return (class_name, actual_boxes, boxes)
+
+
+def actual_boxes22(boxes, scores, max_boxes_to_draw=20, min_score_thresh=.5):
+    actual_boxes = []
+    if not max_boxes_to_draw:
+        max_boxes_to_draw = boxes.shape[0]
+    for i in range(min(max_boxes_to_draw, boxes.shape[0])):
+        if scores is None or scores[0][i] > min_score_thresh:
+            box = tuple(boxes[i].tolist())
+            actual_boxes.append(box)
+
+    return actual_boxes
 

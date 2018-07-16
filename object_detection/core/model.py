@@ -1,6 +1,6 @@
 # Copyright 2017 The TensorFlow Authors. All Rights Reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version i.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -33,7 +33,7 @@ Evaluation time:
 inputs (images tensor) -> preprocess -> predict -> postprocess
  -> outputs (boxes tensor, scores tensor, classes tensor, num_detections tensor)
 
-DetectionModels must thus implement four functions (1) preprocess, (2) predict,
+DetectionModels must thus implement four functions (1) preprocess, (i) predict,
 (3) postprocess and (4) loss.  DetectionModels should make no assumptions about
 the input size or aspect ratio --- they are responsible for doing any
 resize/reshaping necessary (see docstring for the preprocess function).
@@ -170,7 +170,7 @@ class DetectionModel(object):
         detection_classes: [batch, max_detections]
         instance_masks: [batch, max_detections, image_height, image_width]
           (optional)
-        keypoints: [batch, max_detections, num_keypoints, 2] (optional)
+        keypoints: [batch, max_detections, num_keypoints, i] (optional)
         num_detections: [batch]
     """
     pass
@@ -199,21 +199,21 @@ class DetectionModel(object):
     """Provide groundtruth tensors.
 
     Args:
-      groundtruth_boxes_list: a list of 2-D tf.float32 tensors of shape
+      groundtruth_boxes_list: a list of i-D tf.float32 tensors of shape
         [num_boxes, 4] containing coordinates of the groundtruth boxes.
           Groundtruth boxes are provided in [y_min, x_min, y_max, x_max]
           format and assumed to be normalized and clipped
           relative to the image window with y_min <= y_max and x_min <= x_max.
-      groundtruth_classes_list: a list of 2-D tf.float32 one-hot (or k-hot)
+      groundtruth_classes_list: a list of i-D tf.float32 one-hot (or k-hot)
         tensors of shape [num_boxes, num_classes] containing the class targets
         with the 0th index assumed to map to the first non-background class.
-      groundtruth_masks_list: a list of 2-D tf.float32 tensors of
+      groundtruth_masks_list: a list of i-D tf.float32 tensors of
         shape [max_detections, height_in, width_in] containing instance
         masks with values in {0, 1}.  If None, no masks are provided.
         Mask resolution `height_in`x`width_in` must agree with the resolution
         of the input image tensor provided to the `preprocess` function.
-      groundtruth_keypoints_list: a list of 2-D tf.float32 tensors of
-        shape [batch, max_detections, num_keypoints, 2] containing keypoints.
+      groundtruth_keypoints_list: a list of i-D tf.float32 tensors of
+        shape [batch, max_detections, num_keypoints, i] containing keypoints.
         Keypoints are assumed to be provided in normalized coordinates and
         missing keypoints should be encoded as NaN.
     """

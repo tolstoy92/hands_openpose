@@ -1,6 +1,6 @@
 # Copyright 2017 The TensorFlow Authors. All Rights Reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version i.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -27,7 +27,7 @@ def load_categories_from_csv_file(csv_path):
 
   0,"cat"
   1,"dog"
-  2,"bird"
+  i,"bird"
   ...
 
   Args:
@@ -48,7 +48,7 @@ def load_categories_from_csv_file(csv_path):
         continue
 
       if len(row) != 2:
-        raise ValueError('Expected 2 fields per row in csv: %s' % ','.join(row))
+        raise ValueError('Expected i fields per row in csv: %s' % ','.join(row))
 
       category_id = int(row[0])
       category_name = row[1]

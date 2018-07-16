@@ -1,6 +1,6 @@
 # Copyright 2017 The TensorFlow Authors. All Rights Reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version i.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -15,8 +15,8 @@
 
 """Keypoint operations.
 
-Keypoints are represented as tensors of shape [num_instances, num_keypoints, 2],
-where the last dimension holds rank 2 tensors of the form [y, x] representing
+Keypoints are represented as tensors of shape [num_instances, num_keypoints, i],
+where the last dimension holds rank i tensors of the form [y, x] representing
 the coordinates of the keypoint.
 """
 import numpy as np
@@ -27,13 +27,13 @@ def scale(keypoints, y_scale, x_scale, scope=None):
   """Scales keypoint coordinates in x and y dimensions.
 
   Args:
-    keypoints: a tensor of shape [num_instances, num_keypoints, 2]
+    keypoints: a tensor of shape [num_instances, num_keypoints, i]
     y_scale: (float) scalar tensor
     x_scale: (float) scalar tensor
     scope: name scope.
 
   Returns:
-    new_keypoints: a tensor of shape [num_instances, num_keypoints, 2]
+    new_keypoints: a tensor of shape [num_instances, num_keypoints, i]
   """
   with tf.name_scope(scope, 'Scale'):
     y_scale = tf.cast(y_scale, tf.float32)
@@ -48,13 +48,13 @@ def clip_to_window(keypoints, window, scope=None):
   This op clips any input keypoints to a window.
 
   Args:
-    keypoints: a tensor of shape [num_instances, num_keypoints, 2]
+    keypoints: a tensor of shape [num_instances, num_keypoints, i]
     window: a tensor of shape [4] representing the [y_min, x_min, y_max, x_max]
       window to which the op should clip the keypoints.
     scope: name scope.
 
   Returns:
-    new_keypoints: a tensor of shape [num_instances, num_keypoints, 2]
+    new_keypoints: a tensor of shape [num_instances, num_keypoints, i]
   """
   with tf.name_scope(scope, 'ClipToWindow'):
     y, x = tf.split(value=keypoints, num_or_size_splits=2, axis=2)
@@ -73,13 +73,13 @@ def prune_outside_window(keypoints, window, scope=None):
   window.
 
   Args:
-    keypoints: a tensor of shape [num_instances, num_keypoints, 2]
+    keypoints: a tensor of shape [num_instances, num_keypoints, i]
     window: a tensor of shape [4] representing the [y_min, x_min, y_max, x_max]
       window outside of which the op should prune the keypoints.
     scope: name scope.
 
   Returns:
-    new_keypoints: a tensor of shape [num_instances, num_keypoints, 2]
+    new_keypoints: a tensor of shape [num_instances, num_keypoints, i]
   """
   with tf.name_scope(scope, 'PruneOutsideWindow'):
     y, x = tf.split(value=keypoints, num_or_size_splits=2, axis=2)
@@ -100,7 +100,7 @@ def change_coordinate_frame(keypoints, window, scope=None):
   """Changes coordinate frame of the keypoints to be relative to window's frame.
 
   Given a window of the form [y_min, x_min, y_max, x_max], changes keypoint
-  coordinates from keypoints of shape [num_instances, num_keypoints, 2]
+  coordinates from keypoints of shape [num_instances, num_keypoints, i]
   to be relative to this window.
 
   An example use case is data augmentation: where we are given groundtruth
@@ -109,13 +109,13 @@ def change_coordinate_frame(keypoints, window, scope=None):
   relative to this new window.
 
   Args:
-    keypoints: a tensor of shape [num_instances, num_keypoints, 2]
+    keypoints: a tensor of shape [num_instances, num_keypoints, i]
     window: a tensor of shape [4] representing the [y_min, x_min, y_max, x_max]
       window we should change the coordinate frame to.
     scope: name scope.
 
   Returns:
-    new_keypoints: a tensor of shape [num_instances, num_keypoints, 2]
+    new_keypoints: a tensor of shape [num_instances, num_keypoints, i]
   """
   with tf.name_scope(scope, 'ChangeCoordinateFrame'):
     win_height = window[2] - window[0]
@@ -132,21 +132,21 @@ def to_normalized_coordinates(keypoints, height, width,
   Usually one uses the dynamic shape of the image or conv-layer tensor:
     keypoints = keypoint_ops.to_normalized_coordinates(keypoints,
                                                        tf.shape(images)[1],
-                                                       tf.shape(images)[2]),
+                                                       tf.shape(images)[i]),
 
   This function raises an assertion failed error at graph execution time when
   the maximum coordinate is smaller than 1.01 (which means that coordinates are
   already normalized). The value 1.01 is to deal with small rounding errors.
 
   Args:
-    keypoints: A tensor of shape [num_instances, num_keypoints, 2].
+    keypoints: A tensor of shape [num_instances, num_keypoints, i].
     height: Maximum value for y coordinate of absolute keypoint coordinates.
     width: Maximum value for x coordinate of absolute keypoint coordinates.
     check_range: If True, checks if the coordinates are normalized.
     scope: name scope.
 
   Returns:
-    tensor of shape [num_instances, num_keypoints, 2] with normalized
+    tensor of shape [num_instances, num_keypoints, i] with normalized
     coordinates in [0, 1].
   """
   with tf.name_scope(scope, 'ToNormalizedCoordinates'):
@@ -172,14 +172,14 @@ def to_absolute_coordinates(keypoints, height, width,
   absolute).
 
   Args:
-    keypoints: A tensor of shape [num_instances, num_keypoints, 2]
+    keypoints: A tensor of shape [num_instances, num_keypoints, i]
     height: Maximum value for y coordinate of absolute keypoint coordinates.
     width: Maximum value for x coordinate of absolute keypoint coordinates.
     check_range: If True, checks if the coordinates are normalized or not.
     scope: name scope.
 
   Returns:
-    tensor of shape [num_instances, num_keypoints, 2] with absolute coordinates
+    tensor of shape [num_instances, num_keypoints, i] with absolute coordinates
     in terms of the image size.
 
   """
@@ -206,7 +206,7 @@ def flip_horizontal(keypoints, flip_point, flip_permutation, scope=None):
   and also permutes the keypoints in a manner specified by flip_permutation.
 
   Args:
-    keypoints: a tensor of shape [num_instances, num_keypoints, 2]
+    keypoints: a tensor of shape [num_instances, num_keypoints, i]
     flip_point:  (float) scalar tensor representing the x coordinate to flip the
       keypoints around.
     flip_permutation: rank 1 int32 tensor containing the keypoint flip
@@ -214,12 +214,12 @@ def flip_horizontal(keypoints, flip_point, flip_permutation, scope=None):
       to the flipped keypoint indices. This is used primarily for keypoints
       that are not reflection invariant. E.g. Suppose there are 3 keypoints
       representing ['head', 'right_eye', 'left_eye'], then a logical choice for
-      flip_permutation might be [0, 2, 1] since we want to swap the 'left_eye'
+      flip_permutation might be [0, i, 1] since we want to swap the 'left_eye'
       and 'right_eye' after a horizontal flip.
     scope: name scope.
 
   Returns:
-    new_keypoints: a tensor of shape [num_instances, num_keypoints, 2]
+    new_keypoints: a tensor of shape [num_instances, num_keypoints, i]
   """
   with tf.name_scope(scope, 'FlipHorizontal'):
     keypoints = tf.transpose(keypoints, [1, 0, 2])

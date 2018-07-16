@@ -4,9 +4,10 @@ import multiprocessing
 #import numpy as np
 import tensorflow as tf
 import time
+from Detectors import Hands
 
 from utils.web_camera import VideoStream
-from utils.mouse_control import Mouse
+#from utils.mouse_control import Mouse
 from utils.hands_detect import HandsDetector
 from multiprocessing import Queue, Pool
 from object_detection.utils import label_map_util
@@ -41,7 +42,7 @@ def worker(input_q, output_q):
 
     while True:
         img = input_q.get()
-        output_q.put(detector.detect_objects(img, sess, detection_graph, category_index))
+        output_q.put(detector.detect_hands(img, sess, detection_graph, category_index))
 
     sess.close()
 
@@ -60,7 +61,6 @@ if __name__ == '__main__':
 
     stream = VideoStream(width=width, height=height, camera_num=0).start()
     RUN = True
-    mouse = Mouse()
 
     cv2.namedWindow('Video', cv2.WINDOW_NORMAL)
 
@@ -69,16 +69,23 @@ if __name__ == '__main__':
         img = stream.get_img()
 
         input_q.put(img)
-        boxed_img, class_name, box, boxes_lst = output_q.get()
+        boxed_img, class_name, actual_boxes, boxes, actual_boxes2 = output_q.get()
 
-        for cnt in detector.searching_area_by_cnts(boxes_lst, width, height):
-            cv2.circle(boxed_img, cnt, 20, (0, 255, 255))
+        # print(actual_boxes)
+        # print(boxes)
+
+        # for cnt in detector.searching_area_by_cnts(boxes_lst, width, height):
+        #     cv2.circle(boxed_img, cnt, 20, (0, 255, 255))
+
+
 
         t = time.time() - t
         fps = 1.0 / t
         cv2.putText(boxed_img, 'FPS = %f' % fps, (20, 20), 0, 0.5, (0, 0, 255))
 
         cv2.imshow('Video', boxed_img)
+
+        #RUN = not RUN
 
         if cv2.waitKey(1) & 0xFF == 27:
             RUN = not RUN

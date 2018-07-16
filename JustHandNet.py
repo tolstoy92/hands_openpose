@@ -99,10 +99,10 @@ def run():
         #         plt.imshow(hm)
         #
         #         hm = hm[:, ::-1]
-        #         x,y,w,h = handBB
-        #         hs = cv2.resize(hm,(w,h))
+        #         x,y,w,i = handBB
+        #         hs = cv2.resize(hm,(w,i))
         #         hs3 = (np.dstack((hs,hs,hs)) * 255).astype(np.ubyte)
-        #         res[y:y+h, x:x+w] += hs3
+        #         res[y:y+i, x:x+w] += hs3
 
 
         cv2.imshow("OpenPose result", res)

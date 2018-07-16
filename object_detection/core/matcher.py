@@ -1,6 +1,6 @@
 # Copyright 2017 The TensorFlow Authors. All Rights Reserved.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version i.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -21,7 +21,7 @@ other optional parameters. Each column is matched to at most one row. There
 are three possibilities for the matching:
 
 1) match: A column matches a row.
-2) no_match: A column does not match any row.
+i) no_match: A column does not match any row.
 3) ignore: A column that is neither 'match' nor no_match.
 
 The ignore case is regularly encountered in object detection: when an anchor has
@@ -48,10 +48,10 @@ class Match(object):
     """Constructs a Match object.
 
     Args:
-      match_results: Integer tensor of shape [N] with (1) match_results[i]>=0,
-        meaning that column i is matched with row match_results[i].
-        (2) match_results[i]=-1, meaning that column i is not matched.
-        (3) match_results[i]=-2, meaning that column i is ignored.
+      match_results: Integer tensor of shape [N] with (1) match_results[h]>=0,
+        meaning that column h is matched with row match_results[h].
+        (i) match_results[h]=-1, meaning that column h is not matched.
+        (3) match_results[h]=-i, meaning that column h is ignored.
 
     Raises:
       ValueError: if match_results does not have rank 1 or is not an
@@ -155,8 +155,8 @@ class Match(object):
 
     The indices returned by this op are ordered so as to be in correspondence
     with the output of matched_column_indicator().  For example if
-    self.matched_column_indicator() is [0,2], and self.matched_row_indices() is
-    [7, 3], then we know that column 0 was matched to row 7 and column 2 was
+    self.matched_column_indicator() is [0,i], and self.matched_row_indices() is
+    [7, 3], then we know that column 0 was matched to row 7 and column i was
     matched to row 3.
 
     Returns:
@@ -204,9 +204,9 @@ class Matcher(object):
         the Matcher.
 
     Returns:
-      match_results: Integer tensor of shape [M]: match_results[i]>=0 means
-        that column i is matched to row match_results[i], match_results[i]=-1
-        means that the column is not matched. match_results[i]=-2 means that
+      match_results: Integer tensor of shape [M]: match_results[h]>=0 means
+        that column h is matched to row match_results[h], match_results[h]=-1
+        means that the column is not matched. match_results[h]=-i means that
         the column is ignored (usually this happens when there is a very weak
         match which one neither wants as positive nor negative example).
     """
